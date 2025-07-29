@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorLink - Donde las ideas se transforman en propósito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+            --light-gray: #333333;
+            --text-light: #e5e5e5;
+            --text-muted: #999999;x
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gold);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--dark-gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--light-gray);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            text-align: center;
+        }
+
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-gray);
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--light-gray);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">MentorLink</a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Donde las ideas se transforman en propósito y los sueños en estrategia</h1>
+            <p>Conectamos emprendedores con mentores expertos para impulsar el crecimiento sostenible de tu negocio</p>
+            <a href="#contacto" class="cta-button">Quiero una mentoría</a>
+        </div>
+        <div class="floating-element" style="top: 20%; left: 10%; width: 50px; height: 50px; background: var(--gold); border-radius: 50%;"></div>
+        <div class="floating-element" style="top: 60%; right: 15%; width: 30px; height: 30px; background: var(--gold); border-radius: 50%;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="section">
+        <h2 class="section-title">Sobre MentorLink</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Nuestra Misión</h3>
+                <p>Democratizar el acceso a mentoría de calidad para emprendedores de todo el mundo, conectándolos con expertos que han recorrido el camino del éxito empresarial.</p>
+                <p>Creemos que cada emprendedor merece tener acceso a la sabiduría y experiencia necesaria para convertir sus ideas en negocios prósperos y sostenibles.</p>
+                <h3>¿Por qué confiar en nosotros?</h3>
+                <p>Utilizamos inteligencia artificial para crear el emparejamiento perfecto entre mentores y emprendedores, garantizando sesiones de alta calidad y resultados tangibles.</p>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">80%</span>
+                    <span class="stat-label">de PYMES fracasan por falta de asesoría</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">200%</span>
+                    <span class="stat-label">crecimiento de mentorías virtuales</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">40%</span>
+                    <span class="stat-label">reducción en tiempo de búsqueda con IA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="section services">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Mentorías Personalizadas</h3>
+                <p>Sesiones uno a uno con mentores expertos adaptadas a las necesidades específicas de tu negocio y objetivos de crecimiento.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Mentorías Grupales</h3>
+                <p>Aprende junto a otros emprendedores en sesiones grupales dinámicas que fomentan el networking y el aprendizaje colaborativo.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Asesoría Empresarial</h3>
+                <p>Consultoría estratégica para empresas en crecimiento que buscan optimizar procesos, escalar operaciones y mejorar su rentabilidad.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3>Cursos y Talleres</h3>
+                <p>Contenido educativo premium con metodologías probadas en liderazgo, marketing digital, finanzas y gestión empresarial.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤝</div>
+                <h3>Networking Empresarial</h3>
+                <p>Conecta con una comunidad global de emprendedores, inversionistas y mentores que comparten tu visión de crecimiento.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>Matching con IA</h3>
+                <p>Nuestra inteligencia artificial encuentra el mentor perfecto para ti basándose en tu industria, objetivos y estilo de aprendizaje.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="section testimonials">
+        <h2 class="section-title">Lo que dicen nuestros emprendedores</h2>
+        <div class="testimonial">
+            <p class="testimonial-text">"Gracias a MentorLink pude escalar mi startup tecnológica de 0 a 100 clientes en solo 6 meses. El mentor que me asignaron tenía exactamente la experiencia que necesitaba."</p>
+            <p class="testimonial-author">- María González, CEO de TechStart</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section contact">
+        <h2 class="section-title">Agenda tu primera sesión</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Completa el formulario y un miembro de nuestro equipo te contactará para agendar tu llamada gratuita de diagnóstico.</p>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="empresa">Empresa o proyecto</label>
+                <input type="text" id="empresa" name="empresa">
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Cuéntanos sobre tu desafío</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe brevemente en qué área necesitas mentoría..."></textarea>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%;">Solicitar llamada gratuita</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="logo" style="font-size: 1.5rem; margin-bottom: 1rem;">MentorLink</div>
+            <p>Transformando emprendedores en líderes exitosos</p>
+            <p>📧 contacto@mentorlink.com | 📱 WhatsApp: +506 8888-8888</p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">💼</a>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.9rem;">&copy; 2025 MentorLink. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            }
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu interés! Te contactaremos pronto para agendar tu llamada gratuita.');
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
